@@ -1,0 +1,66 @@
+baseURL = 'https://fullcycledeveloper.com'
+languageCode = 'en-us'
+title = 'The full cycle developer blog'
+theme = 'hugo-theme-cleanwhite'
+preserveTaxonomyNames = true
+paginate = 20 #frontpage pagination
+hasCJKLanguage = true
+
+[outputs]
+home = ["HTML", "RSS", "Algolia"]
+
+[params]
+  header_image = "img/home.jpg"
+  SEOTitle = "The full cycle developer blog"
+  description = "A blog by Geert van der Cruijsen about all aspects of software development"
+  keyword = "software development, developer, cloud, cloud native, azure, microsoft, microservices, agile, engineering culture"
+  slogan = "A blog by Geert van der Cruijsen about everything software development related"
+  omit_categories= "false"
+
+  friends = true
+  bookmarks = false
+  about_me = true
+
+  # Sidebar settings
+  sidebar_about_description = "Geert van der Cruijsen: Lead Consultant @ Xpirit, Public Speaker, Software Developer, Cloud Native Architect, Microsoft MVP"
+  sidebar_avatar = "img/geert.png"
+
+  featured_tags = true 
+  featured_condition_size = 1 
+
+# algolia site search
+  algolia_search = true
+  algolia_appId = "9AWS4CUHVW"
+  algolia_indexName = "fullcycledeveloper-blog"
+  algolia_apiKey = "8f7d4ec457687f7a2788748eb51dfcad" #public api key for search
+
+  [params.social]
+  rss            = true 
+  email          = "geert@vdcruijsen.net"
+  twitter        = "https://twitter.com/geertvdc"
+  linkedin       = "https://www.linkedin.com/in/geertvandercruijsen/"
+  github         = "https://github.com/geertvdc"
+
+[markup]
+  [markup.tableOfContents]
+    endLevel = 2
+    startLevel = 1
+  [markup.highlight]
+    style = "dracula"
+
+[outputFormats.Algolia]
+baseName = "algolia"
+isPlainText = true
+mediaType = "application/json"
+notAlternative = true
+
+[params.algolia]
+vars = ["title", "summary", "date", "publishdate", "expirydate", "permalink"]
+params = ["categories", "tags"] 
+
+  [[params.friend_link]]
+  title = "Xpirit"
+  href =  "https://Xpirit.com"
+  [[params.friend_link]]
+  title = "Azure Community Live"
+  href =  "https://azure-community.live"
