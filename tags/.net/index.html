@@ -1,0 +1,339 @@
+<!doctype html><html lang=en-us>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta property="og:site_name" content="The full cycle developer blog">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://fullcycledeveloper.com/img/home.jpg">
+<meta property="twitter:image" content="https://fullcycledeveloper.com/img/home.jpg">
+<meta name=title content=".Net">
+<meta property="og:title" content=".Net">
+<meta property="twitter:title" content=".Net">
+<meta name=description content="A blog by Geert van der Cruijsen about all aspects of software development">
+<meta property="og:description" content="A blog by Geert van der Cruijsen about all aspects of software development">
+<meta property="twitter:description" content="A blog by Geert van der Cruijsen about all aspects of software development">
+<meta property="twitter:card" content="summary">
+<meta name=keyword content="software development, developer, cloud, cloud native, azure, microsoft, microservices, agile, engineering culture">
+<link rel="shortcut icon" href=/img/favicon.ico>
+<title>.Net-The full cycle developer blog</title>
+<link rel=canonical href=/tags/.net/>
+<link rel=stylesheet href=/css/iDisqus.min.css>
+<link rel=stylesheet href=/css/bootstrap.min.css>
+<link rel=stylesheet href=/css/hugo-theme-cleanwhite.min.css>
+<link rel=stylesheet href=/css/zanshang.css>
+<link href=//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css rel=stylesheet type=text/css>
+<link rel=stylesheet href=https://fullcycledeveloper.com/css/fullcycledeveloper.css>
+<script src=/js/jquery.min.js></script>
+<script src=/js/bootstrap.min.js></script>
+<script src=/js/hux-blog.min.js></script>
+</head>
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+<div class=container-fluid>
+<div class="navbar-header page-scroll">
+<button type=button class=navbar-toggle>
+<span class=sr-only>Toggle navigation</span>
+<span class=icon-bar></span>
+<span class=icon-bar></span>
+<span class=icon-bar></span>
+</button>
+<a class=navbar-brand href=/>The full cycle developer blog</a>
+</div>
+<div id=huxblog_navbar>
+<div class=navbar-collapse>
+<ul class="nav navbar-nav navbar-right">
+<li>
+<a href=/>Home</a>
+</li>
+<li><a href=/top/about/>ABOUT</a></li>
+<li>
+<a href=/search><i class="fa fa-search"></i></a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</nav>
+<script>var $body=document.body,$toggle=document.querySelector('.navbar-toggle'),$navbar=document.querySelector('#huxblog_navbar'),$collapse=document.querySelector('.navbar-collapse');$toggle.addEventListener('click',handleMagic);function handleMagic(a){$navbar.className.indexOf('in')>0?($navbar.className=" ",setTimeout(function(){$navbar.className.indexOf('in')<0&&($collapse.style.height="0px")},400)):($collapse.style.height="auto",$navbar.className+=" in")}</script>
+<header class=intro-header style=background-image:url(/img/home.jpg)>
+<div class=container>
+<div class=row>
+<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+<div class=site-heading>
+<h1>The full cycle developer blog </h1>
+<span class=subheading>A blog by Geert van der Cruijsen about everything software development related</span>
+</div>
+</div>
+</div>
+</div>
+</header>
+<div class=container>
+<div class=row>
+<div class="col-lg-8 col-lg-offset-1
+col-md-8 col-md-offset-1
+col-sm-12
+col-xs-12
+post-container">
+<div class="post-preview post-preview-box">
+<div class="post-preview post-preview-container" style=background-image:url(/img/plug.jpg);background-size:cover>
+<a href=https://fullcycledeveloper.com/2022/01/18/generate-sandbox-apis/>
+<h1 class=post-title>
+Generating sandbox APIs for your ASP.Net Core Web APIs
+</h1>
+<h2 class=post-subtitle>
+Give your API consumers a sandbox to test your API from day 1
+</h2>
+</a>
+<p class=post-meta>
+Posted by Geert van der Cruijsen Monday, January 17, 2022
+</p>
+</div>
+<div class=post-preview>
+<p>When building APIs I often want to share my contract as soon as possible. Especially when you know your consumers and are you&rsquo;re open for feedback and discussion on the contract of the API.</p>
+<h2 id=contract-first-or-code-first>Contract first or Code first?</h2>
+<p>Although I want to share my contract as soon as possible I don&rsquo;t like these API contract designer tools. My approach is often just creating an empty API in Asp.Net Core by defining the controllers and classes that define the contract. Adding <a href=https://github.com/domaindrivendev/Swashbuckle.AspNetCore>Swashbuckle</a> to your project will generate a Swagger file / Open API Spec based on the controllers and classes that you can use to document your API.</p>
+<h2 id=giving-your-consumers-a-testable-solution-as-soon-as-possible>Giving your consumers a testable solution as soon as possible</h2>
+<p>So an early API specification / contract is quite easy to create. But what if what if we could actually generate a working API from this specification that returns fake data? There are certain tools that can do this for you like <a href=https://github.com/jormaechea/open-api-mocker>Open API Mock</a>. This tool can generate a working API from an API specification and return fake data based on additional extension properties in the specification.</p>
+<p>Let&rsquo;s take a look at a basic swagger file (weather forecast from the built in template when you create a new Asp.Net Core Web API Project). I&rsquo;ve added some extension properties (<code>x-faker</code>) to the specification by hand so Open API Mock knows what kind of fake data it should generate. Open API Mock generates this data through a library called <a href=https://github.com/faker-js/faker>Faker</a>. It has a wide range of fake data generators from numbers, to street names, phone numbers, bank details etc. Also available in many country specific variants.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=color:#f1fa8c>&#34;schemas&#34;</span>: {
+  <span style=color:#ff79c6>&#34;WeatherForecast&#34;</span>: {
+    <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;object&#34;</span>,
+    <span style=color:#ff79c6>&#34;properties&#34;</span>: {
+      <span style=color:#ff79c6>&#34;date&#34;</span>: {
+        <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;string&#34;</span>,
+        <span style=color:#ff79c6>&#34;format&#34;</span>: <span style=color:#f1fa8c>&#34;date-time&#34;</span>,
+        <span style=color:#ff79c6>&#34;x-faker&#34;</span>: <span style=color:#f1fa8c>&#34;date.recent&#34;</span>
+      },
+      <span style=color:#ff79c6>&#34;temperatureC&#34;</span>: {
+        <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;integer&#34;</span>,
+        <span style=color:#ff79c6>&#34;format&#34;</span>: <span style=color:#f1fa8c>&#34;int32&#34;</span>,
+        <span style=color:#ff79c6>&#34;x-faker&#34;</span>: <span style=color:#f1fa8c>&#34;datatype.number(-10,35)&#34;</span>
+      },
+      <span style=color:#ff79c6>&#34;temperatureF&#34;</span>: {
+        <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;integer&#34;</span>,
+        <span style=color:#ff79c6>&#34;format&#34;</span>: <span style=color:#f1fa8c>&#34;int32&#34;</span>,
+        <span style=color:#ff79c6>&#34;readOnly&#34;</span>: <span style=color:#ff79c6>true</span>,
+        <span style=color:#ff79c6>&#34;x-faker&#34;</span>: <span style=color:#f1fa8c>&#34;datatype.number(105)&#34;</span>
+      },
+      <span style=color:#ff79c6>&#34;summary&#34;</span>: {
+        <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;string&#34;</span>,
+        <span style=color:#ff79c6>&#34;nullable&#34;</span>: <span style=color:#ff79c6>true</span>,
+        <span style=color:#ff79c6>&#34;x-faker&#34;</span>: <span style=color:#f1fa8c>&#34;lorem.paragraph&#34;</span>
+      }
+    },
+    <span style=color:#ff79c6>&#34;additionalProperties&#34;</span>: <span style=color:#ff79c6>false</span>
+  }
+}
+</code></pre></div><p>We can now use this swagger file and feed it to Open API Mock to generate a working API by using Docker to run the Open API Mock container.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>docker run -v <span style=color:#f1fa8c>&#34;[path to your]swagger.json:/app/schema.json&#34;</span> -p <span style=color:#f1fa8c>&#34;8080:5000&#34;</span> jormaechea/open-api-mocker
+</code></pre></div><p>Now when we test this API you&rsquo;ll see that Open API Mock returns fake data specified in the faker extension properties of the specification.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json>[
+  {
+    <span style=color:#ff79c6>&#34;date&#34;</span>:<span style=color:#f1fa8c>&#34;2022-01-05T22:25:30.366Z&#34;</span>,
+    <span style=color:#ff79c6>&#34;temperatureC&#34;</span>:<span style=color:#bd93f9>-6</span>,
+    <span style=color:#ff79c6>&#34;temperatureF&#34;</span>:<span style=color:#bd93f9>41</span>,
+    <span style=color:#ff79c6>&#34;summary&#34;</span>:<span style=color:#f1fa8c>&#34;Praesentium iste natus temporibus omnis nihil perspiciatis quo. Rerum odit blanditiis quia autem et earum magnam quod. Suscipit voluptate quia voluptatibus ea reiciendis. Sed praesentium sed in est.&#34;</span>
+  }
+]
+</code></pre></div><h2 id=adding-this-functionality-automatically-to-your-swashbuckle-generated-swagger-file>Adding this functionality automatically to your Swashbuckle generated swagger file</h2>
+<p>So manually adding a swagger file is nice but what if you want to add this functionality automatically to your swagger file when it&rsquo;s being generated by Swashbuckle? I&rsquo;ve created a small extension to Swashbuckle, published through Nuget called <a href=https://www.nuget.org/packages/Swashbuckle.AspNetCore.ExtensionProperties/>Swashbuckle.AspNetCore.ExtensionProperties</a>. What this allows you to do is to add attributes to your classes that are used in the Open API Specification that is generated by Swashbuckle.</p>
+<p>If you install the Nuget package you can add attributes in the following way:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-C# data-lang=C#><span style=color:#ff79c6>public</span> <span style=color:#ff79c6>class</span> <span style=color:#50fa7b>WeatherForecast</span>
+{
+<span style=color:#50fa7b>    [Faker(fakerValue:&#34;date.recent&#34;)]</span>
+    <span style=color:#ff79c6>public</span> DateTime Date { <span style=color:#ff79c6>get</span>; <span style=color:#ff79c6>set</span>; }
+<span style=color:#50fa7b>
+</span><span style=color:#50fa7b>    [Faker(fakerValue:&#34;datatype.number(-10,35)&#34;)]</span>
+    <span style=color:#ff79c6>public</span> <span style=color:#8be9fd>int</span> TemperatureC { <span style=color:#ff79c6>get</span>; <span style=color:#ff79c6>set</span>; }
+<span style=color:#50fa7b>
+</span><span style=color:#50fa7b>    [Faker(fakerValue:&#34;datatype.number(105)&#34;)]</span>
+    <span style=color:#ff79c6>public</span> <span style=color:#8be9fd>int</span> TemperatureF =&gt; <span style=color:#bd93f9>32</span> + (<span style=color:#8be9fd>int</span>)(TemperatureC / <span style=color:#bd93f9>0.5556</span>);
+<span style=color:#50fa7b>
+</span><span style=color:#50fa7b>    [Faker(fakerValue:&#34;lorem.paragraph&#34;)]</span>
+    <span style=color:#ff79c6>public</span> <span style=color:#8be9fd>string?</span> Summary { <span style=color:#ff79c6>get</span>; <span style=color:#ff79c6>set</span>; }
+}
+</code></pre></div><p>Generating the specification file by running the API will result in the exact same json as mentioned earlier in this post.</p>
+<p>The source of this nuget package is open source and can be found on my <a href=https://github.com/geertvdc/Swashbuckle.AspNetCore.ExtensionProperties>Github repo</a>. It can also be used to add other types of extension properties that you might want to add to your specification file for other tools that process your swagger files.</p>
+<p>So whenever we would start a new API Project we could have a running sandbox solution that returns fake data for our API in only a few minutes by just following the following steps mentioned earlier:</p>
+<ol>
+<li>Create a new Asp.Net Core Web API Project with Controllers + Classes</li>
+<li>Add <a href=https://github.com/domaindrivendev/Swashbuckle.AspNetCore>Swashbuckle</a> to the project</li>
+<li>Add the <a href=https://www.nuget.org/packages/Swashbuckle.AspNetCore.ExtensionProperties/>Swashbuckle.AspNetCore.ExtensionProperties</a> NuGet package to the project</li>
+<li>Add <code>Faker</code> attributes to your properties in your Classes.</li>
+<li>Extract the .json file from your API by running the API and browsing to the Swagger UI on <code>[api]/swagger/</code></li>
+<li>Run the Open API Mock using your swagger file</li>
+</ol>
+<h2 id=using-this-in-automation--pipelines-and-automatically-posting-it-to-azure-api-management>Using this in Automation / pipelines and automatically posting it to Azure API Management</h2>
+<p>The steps above are quite easy to do but I always try to set up all deployments through continous delivery pipelines. So what I like to do for every change made to the API is to automatically deploy it&rsquo;s specification to Azure API Management. There is quite some information on how to do this either by infrastructure as code tech such as ARM or TerraForm but also using the Azure CLI or Powershell. I&rsquo;ll skip on the basics of how to import an API to API management but would like to focus on how you could work with both a sandbox and the actual API.</p>
+<h3 id=blogs--documentation-on-azure-api-management-deployments-from-delivery-pipelines>Blogs & documentation on Azure API Management deployments from delivery pipelines.</h3>
+<ul>
+<li><a href=https://mobilefirstcloudfirst.net/2017/07/setting-continuous-delivery-azure-api-management-vsts/>https://mobilefirstcloudfirst.net/2017/07/setting-continuous-delivery-azure-api-management-vsts/</a></li>
+<li><a href=https://docs.microsoft.com/en-us/azure/api-management/devops-api-development-templates>https://docs.microsoft.com/en-us/azure/api-management/devops-api-development-templates</a></li>
+<li><a href=https://mscloud.be/azure/Update-API-in-APIM-from-Azure-Devops/>https://mscloud.be/azure/Update-API-in-APIM-from-Azure-Devops/</a></li>
+</ul>
+<h3 id=sandboxes-in-azure-api-management>Sandboxes in Azure API Management.</h3>
+<p>Azure API management has the notion of &ldquo;Products&rdquo;. These products are a way you can group certain APIs together and give a specific audience access to these APIs. When working with sandboxes I always prefer to create 2 products, one for the sandbox APIs and one for the actual APIs. This way you have 2 APIs for each of your API. 1 sandbox API in the sandbox product and 1 actual API in the production product.</p>
+<p>Sandboxes are APIs that do not contain any real data so opening them up for everyone is a best practice so people can get inspired by browsing through the API list and playing around with them.</p>
+<h3 id=how-to-easily-get-the-open-api-specification-from-a-aspnet-core-web-api-project-in-a-pipeline>How to easily get the Open API Specification from a ASP.Net Core Web API project in a pipeline</h3>
+<p>The Swashbuckle project comes with a CLI tool to download the Open API specification file with a simple command. You can download and use the Swashbuckle.AspNetCore.Cli tool by running the following command:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>dotnet tool install -g --version 6.2.3 Swashbuckle.AspNetCore.Cli
+
+swagger tofile --output swagger.json YourApi/bin/Debug/net6.0/YourApi.dll <span style=color:#f1fa8c>&#34;v1&#34;</span> 
+</code></pre></div><p>After extracting the Open API Specification file you can now pass it into the Open API Mock container and spin that container up somewhere in the cloud on for example an Azure Container Instance, an Azure Web App for Containers or an AKS cluster if you are already using those. After that hook up the Azure API Management backend to your mock and you&rsquo;re ready to go.</p>
+<h2 id=conclusion>Conclusion</h2>
+<p>Hopefully this post, the nuget package and other tools I mentioned helps in shifting left the communication of API designs with your consumers so they have an early view on the contract but also an actual working API sandbox.</p>
+<p>Geert van der Cruijsen</p>
+</div>
+</div>
+<hr>
+</div>
+<div class="col-lg-3 col-lg-offset-0
+col-md-3 col-md-offset-0
+col-sm-12
+col-xs-12
+sidebar-container">
+<section>
+<hr class="hidden-sm hidden-xs">
+<h5>FEATURED TAGS</h5>
+<div class=tags>
+<a href=/tags/.net title=.net>
+.net
+</a>
+<a href=/tags/api title=api>
+api
+</a>
+<a href=/tags/api-management title=api-management>
+api-management
+</a>
+<a href=/tags/asp.net-core title=asp.net-core>
+asp.net-core
+</a>
+<a href=/tags/azure title=azure>
+azure
+</a>
+<a href=/tags/blog title=blog>
+blog
+</a>
+<a href=/tags/personal title=personal>
+personal
+</a>
+<a href=/tags/testing title=testing>
+testing
+</a>
+</div>
+</section>
+<section class="visible-md visible-lg">
+<hr><h5><a href=/top/about>ABOUT ME</a></h5>
+<div class=short-about>
+<a href=/top/about>
+<img src=/img/geert.png alt=avatar style=cursor:pointer>
+</a>
+<p>Geert van der Cruijsen: Lead Consultant @ Xpirit, Public Speaker, Software Developer, Cloud Native Architect, Microsoft MVP</p>
+<ul class=list-inline>
+<li>
+<a href=/tags/.net/index.xml rel=alternate type=application/rss+xml title="The full cycle developer blog">
+<span class="fa-stack fa-lg">
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+</span>
+</a>
+</li>
+<li>
+<a href=https://twitter.com/geertvdc>
+<span class="fa-stack fa-lg">
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+</span>
+</a>
+</li>
+<li>
+<a target=_blank href=https://github.com/geertvdc>
+<span class="fa-stack fa-lg">
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-github fa-stack-1x fa-inverse"></i>
+</span>
+</a>
+</li>
+<li>
+<a target=_blank href=https://www.linkedin.com/in/geertvandercruijsen/>
+<span class="fa-stack fa-lg">
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+</span>
+</a>
+</li>
+</ul>
+</div>
+</section>
+<section>
+<hr class="hidden-sm hidden-xs">
+<h5>FRIENDS</h5>
+<ul class=list-inline>
+<li><a target=_blank href=https://Xpirit.com>Xpirit</a></li>
+<li><a target=_blank href=https://azure-community.live>Azure Community Live</a></li>
+</ul>
+</section>
+</div>
+</div>
+</div>
+<footer>
+<div class=container>
+<div class=row>
+<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+<ul class="list-inline text-center">
+<li>
+<a href=/tags/.net/index.xml rel=alternate type=application/rss+xml title="The full cycle developer blog">
+<span class="fa-stack fa-lg">
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+</span>
+</a>
+</li>
+<li>
+<a href=mailto:geert@vdcruijsen.net>
+<span class="fa-stack fa-lg">
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+</span>
+</a>
+</li>
+<li>
+<a href=https://twitter.com/geertvdc>
+<span class="fa-stack fa-lg">
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+</span>
+</a>
+</li>
+<li>
+<a target=_blank href=https://github.com/geertvdc>
+<span class="fa-stack fa-lg">
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-github fa-stack-1x fa-inverse"></i>
+</span>
+</a>
+</li>
+<li>
+<a target=_blank href=https://www.linkedin.com/in/geertvandercruijsen/>
+<span class="fa-stack fa-lg">
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+</span>
+</a>
+</li>
+</ul>
+<p class="copyright text-muted">
+Copyright &copy; Geert van der Cruijsen 2022
+<br>
+<sub><a href=https://themes.gohugo.io/hugo-theme-cleanwhite>CleanWhite Hugo Theme</a> by <a href=https://zhaohuabing.com>Huabing</a></sub>
+</p>
+</div>
+</div>
+</div>
+</footer>
+<script>function loadAsync(f,b){var c=document,d='script',a=c.createElement(d),e=c.getElementsByTagName(d)[0];a.src=f,b&&a.addEventListener('load',function(a){b(null,a)},!1),e.parentNode.insertBefore(a,e)}</script>
+<script>$('#tag_cloud').length!==0&&loadAsync("/js/jquery.tagcloud.js",function(){$.fn.tagcloud.defaults={color:{start:'#bbbbee',end:'#0085a1'}},$('#tag_cloud a').tagcloud()})</script>
+<script>loadAsync("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js",function(){var a=document.querySelector("nav");a&&FastClick.attach(a)})</script>
+<script type=text/javascript>function generateCatalog(a){_containerSelector='div.post-container';var h=$(_containerSelector),c,d,e,f,g,b;return c=h.find('h1,h2,h3,h4,h5,h6'),$(a).html(''),c.each(function(){d=$(this).prop('tagName').toLowerCase(),g="#"+$(this).prop('id'),e=$(this).text(),b=$('<a href="'+g+'" rel="nofollow">'+e+'</a>'),f=$('<li class="'+d+'_nav"></li>').append(b),$(a).append(f)}),!0}generateCatalog(".catalog-body"),$(".catalog-toggle").click(function(a){a.preventDefault(),$('.side-catalog').toggleClass("fold")}),loadAsync("/js/jquery.nav.js",function(){$('.catalog-body').onePageNav({currentClass:"active",changeHash:!1,easing:"swing",filter:"",scrollSpeed:700,scrollOffset:0,scrollThreshold:.2,begin:null,end:null,scrollChange:null,padding:80})})</script>
+</body>
+</html>
