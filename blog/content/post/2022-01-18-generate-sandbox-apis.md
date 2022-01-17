@@ -3,7 +3,7 @@ layout:     post
 title:      "Generating sandbox APIs for your ASP.Net Core Web APIs"
 subtitle:   "Give your API consumers a sandbox to test your API from day 1"
 description: "API sandboxes can be a great way to test your API from day 1. This article will show you how to generate a sandbox for your API in a simple way"
-date:     2022-01-17
+date:     2022-01-18
 author:     "Geert van der Cruijsen"
 image: "/img/plug.jpg"
 tags:
