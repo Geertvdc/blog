@@ -26,7 +26,9 @@ home = ["HTML", "RSS", "Algolia"]
   sidebar_avatar = "img/geert.png"
 
   featured_tags = true 
-  featured_condition_size = 1 
+  featured_condition_size = 0
+
+  custom_css = ["css/fullcycledeveloper.css"]
 
 # algolia site search
   algolia_search = true
@@ -40,6 +42,10 @@ home = ["HTML", "RSS", "Algolia"]
   twitter        = "https://twitter.com/geertvdc"
   linkedin       = "https://www.linkedin.com/in/geertvandercruijsen/"
   github         = "https://github.com/geertvdc"
+
+  [[params.addtional_menus]]
+  title =  "ABOUT"
+  href =  "/top/about/"
 
 [markup]
   [markup.tableOfContents]
@@ -64,3 +70,4 @@ params = ["categories", "tags"]
   [[params.friend_link]]
   title = "Azure Community Live"
   href =  "https://azure-community.live"
+
