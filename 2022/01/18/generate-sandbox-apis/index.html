@@ -1,6 +1,5 @@
 <!doctype html><html lang=en-us>
 <head>
-<meta name=generator content="Hugo 0.92.0">
 <meta charset=utf-8>
 <meta http-equiv=x-ua-compatible content="IE=edge">
 <meta name=viewport content="width=device-width,initial-scale=1">
@@ -8,17 +7,17 @@
 <meta property="og:type" content="article">
 <meta property="og:image" content="https://fullcycledeveloper.com/img/home.jpg">
 <meta property="twitter:image" content="https://fullcycledeveloper.com/img/home.jpg">
-<meta name=title content>
-<meta property="og:title" content>
-<meta property="twitter:title" content>
-<meta name=description content="A blog by Geert van der Cruijsen about all aspects of software development">
-<meta property="og:description" content="A blog by Geert van der Cruijsen about all aspects of software development">
-<meta property="twitter:description" content="A blog by Geert van der Cruijsen about all aspects of software development">
+<meta name=title content="Generating sandbox APIs for your ASP.Net Core Web APIs">
+<meta property="og:title" content="Generating sandbox APIs for your ASP.Net Core Web APIs">
+<meta property="twitter:title" content="Generating sandbox APIs for your ASP.Net Core Web APIs">
+<meta name=description content="API sandboxes can be a great way to test your API from day 1. This article will show you how to generate a sandbox for your API in a simple way">
+<meta property="og:description" content="API sandboxes can be a great way to test your API from day 1. This article will show you how to generate a sandbox for your API in a simple way">
+<meta property="twitter:description" content="API sandboxes can be a great way to test your API from day 1. This article will show you how to generate a sandbox for your API in a simple way">
 <meta property="twitter:card" content="summary">
 <meta name=keyword content="software development, developer, cloud, cloud native, azure, microsoft, microservices, agile, engineering culture">
 <link rel="shortcut icon" href=/img/favicon.ico>
-<title>The full cycle developer blog-The full cycle developer blog</title>
-<link rel=canonical href=/>
+<title>Generating sandbox APIs for your ASP.Net Core Web APIs-The full cycle developer blog</title>
+<link rel=canonical href=/2022/01/18/generate-sandbox-apis>
 <link rel=stylesheet href=/css/iDisqus.min.css>
 <link rel=stylesheet href=/css/bootstrap.min.css>
 <link rel=stylesheet href=/css/hugo-theme-cleanwhite.min.css>
@@ -56,40 +55,51 @@
 </div>
 </nav>
 <script>var $body=document.body,$toggle=document.querySelector('.navbar-toggle'),$navbar=document.querySelector('#huxblog_navbar'),$collapse=document.querySelector('.navbar-collapse');$toggle.addEventListener('click',handleMagic);function handleMagic(a){$navbar.className.indexOf('in')>0?($navbar.className=" ",setTimeout(function(){$navbar.className.indexOf('in')<0&&($collapse.style.height="0px")},400)):($collapse.style.height="auto",$navbar.className+=" in")}</script>
-<header class=intro-header style=background-image:url(/img/home.jpg)>
+<style type=text/css>header.intro-header{background-image:url(/img/plug.jpg)}</style>
+<header class=intro-header>
 <div class=container>
 <div class=row>
 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-<div class=site-heading>
-<h1>The full cycle developer blog </h1>
-<span class=subheading>A blog by Geert van der Cruijsen about everything software development related</span>
+<div class=post-heading>
+<div class=tags>
+<a class=tag href=/tags/api title=API>
+API
+</a>
+<a class=tag href=/tags/asp.net-core title="Asp.net Core">
+Asp.net Core
+</a>
+<a class=tag href=/tags/.net title=.Net>
+.Net
+</a>
+<a class=tag href=/tags/testing title=Testing>
+Testing
+</a>
+<a class=tag href=/tags/api-management title="API Management">
+API Management
+</a>
+<a class=tag href=/tags/azure title=Azure>
+Azure
+</a>
+</div>
+<h1>Generating sandbox APIs for your ASP.Net Core Web APIs</h1>
+<h2 class=subheading>Give your API consumers a sandbox to test your API from day 1</h2>
+<span class=meta>
+Posted by
+Geert van der Cruijsen
+on
+Tuesday, January 18, 2022
+</span>
 </div>
 </div>
 </div>
 </div>
 </header>
+<article>
 <div class=container>
 <div class=row>
-<div class="col-lg-8 col-lg-offset-1
-col-md-8 col-md-offset-1
-col-sm-12
-col-xs-12
+<div class="col-lg-8 col-lg-offset-2
+col-md-10 col-md-offset-1
 post-container">
-<div class="post-preview post-preview-box">
-<div class="post-preview post-preview-container" style=background-image:url(/img/plug.jpg);background-size:cover>
-<a href=https://fullcycledeveloper.com/2022/01/18/generate-sandbox-apis/>
-<h1 class=post-title>
-Generating sandbox APIs for your ASP.Net Core Web APIs
-</h1>
-<h2 class=post-subtitle>
-Give your API consumers a sandbox to test your API from day 1
-</h2>
-</a>
-<p class=post-meta>
-Posted by Geert van der Cruijsen Tuesday, January 18, 2022
-</p>
-</div>
-<div class=post-preview>
 <p>When building APIs I often want to share my contract as soon as possible. Especially when you know your consumers and are you&rsquo;re open for feedback and discussion on the contract of the API.</p>
 <h2 id=contract-first-or-code-first>Contract first or Code first?</h2>
 <p>Although I want to share my contract as soon as possible I don&rsquo;t like these API contract designer tools. My approach is often just creating an empty API in Asp.Net Core by defining the controllers and classes that define the contract. Adding <a href=https://github.com/domaindrivendev/Swashbuckle.AspNetCore>Swashbuckle</a> to your project will generate a Swagger file / Open API Spec based on the controllers and classes that you can use to document your API.</p>
@@ -184,49 +194,32 @@ swagger tofile --output swagger.json YourApi/bin/Debug/net6.0/YourApi.dll <span 
 <h2 id=conclusion>Conclusion</h2>
 <p>Hopefully this post, the nuget package and other tools I mentioned helps in shifting left the communication of API designs with your consumers so they have an early view on the contract but also an actual working API sandbox.</p>
 <p>Geert van der Cruijsen</p>
-</div>
-</div>
 <hr>
-<div class="post-preview post-preview-box">
-<div class="post-preview post-preview-container" style=background-image:url(img/map.jpg);background-size:cover>
-<a href=https://fullcycledeveloper.com/2022/01/14/hello-world/>
-<h1 class=post-title>
-Hello world!
-</h1>
-<h2 class=post-subtitle>
-Welcome to the new blog by Geert van der Cruijsen about Software development
-</h2>
-</a>
-<p class=post-meta>
-Posted by Geert van der Cruijsen Friday, January 14, 2022
-</p>
+<ul class=pager>
+<li class=previous>
+<a href=/2022/01/14/hello-world data-toggle=tooltip data-placement=top title="Hello world!">&larr;
+Previous Post</a>
+</li>
+</ul>
 </div>
-<div class=post-preview>
-<p>As a software developer there is only 1 title you can use to create your first post on a new blog. &ldquo;Hello World!&rdquo;. 👋</p>
-<h3 id=so-why-this-blog>So why this blog?</h3>
-<p>It&rsquo;s actually my 3rd blog website I created. I started of years ago with a blog using Wordpress that I hosted myself. Then about 6 years ago I was working a lot with Azure and wanted to move away from self hosting so I created a new blog (still using Wordpress) but then hosted on Azure. This worked quite well at that time but I lost passion for blogging a couple of years ago.</p>
-<p>Now I wanted to start writing some blogposts again so I had 2 options: dust of my old blog or create a new one. I never really liked the whole Wordpress experience and wanted to move to a static site generator so this was the right time to make the switch to <a href=https://gohugo.io/>Hugo</a> hosted on <a href=https://pages.github.com/>Github Pages</a>.</p>
-<p>The source of this blog can be found here on my <a href=https://github.com/geertvdc/geertvdc.github.io>Github Repo: Geertvdc/geertvdc.github.io</a>.</p>
-<h3 id=full-cycle-developer>Full cycle developer?</h3>
-<p>As my dayjob I work as a Senior Consultant at Xpirit where I help companies build better software. I do this by improving the Engineering culture, introduce new technology and coaching employees from CTOs to Developers. I believe that building the best software is done by teams who follow the DevOps mantra: &ldquo;You build it, you run it!&rdquo;. I love this mantra and try to improve teams on all aspects from architecture, design, implementation, testing, deployments, maintenance, and support. That&rsquo;s why I called this blog &ldquo;The full cycle developer blog&rdquo;.</p>
-<h3 id=sharing-knowledge>Sharing Knowledge</h3>
-<p>Sharing Knowledge is one of my passions. Either by writing articles or blogposts but also by public speaking at international conferences and meetups.</p>
-<h3 id=what-to-expect-on-this-blog>What to expect on this blog?</h3>
-<p>Posts by me on this blog can cover all aspects of software development from technical posts about a certain technology to non technical posts about organizational culture or personal development.</p>
-<h3 id=so-who-am-i>So who am I?</h3>
-<p>My name is Geert van der Cruijsen. I&rsquo;m a senior consultant working at Xpirit in the Netherlands but more important i&rsquo;m also a husband of my wife Patty and father of my daughters Lauren & Amber.</p>
+<div class="col-lg-2 col-lg-offset-0
+visible-lg-block
+sidebar-container
+catalog-container">
+<div class=side-catalog>
+<hr class="hidden-sm hidden-xs">
+<h5>
+<a class=catalog-toggle href=#>CATALOG</a>
+</h5>
+<ul class=catalog-body></ul>
 </div>
 </div>
-<hr>
-</div>
-<div class="col-lg-3 col-lg-offset-0
-col-md-3 col-md-offset-0
-col-sm-12
-col-xs-12
+<div class="col-lg-8 col-lg-offset-2
+col-md-10 col-md-offset-1
 sidebar-container">
 <section>
 <hr class="hidden-sm hidden-xs">
-<h5>FEATURED TAGS</h5>
+<h5><a href=/tags/>FEATURED TAGS</a></h5>
 <div class=tags>
 <a href=/tags/.net title=.net>
 .net
@@ -254,51 +247,8 @@ testing
 </a>
 </div>
 </section>
-<section class="visible-md visible-lg">
-<hr><h5><a href=/top/about>ABOUT ME</a></h5>
-<div class=short-about>
-<a href=/top/about>
-<img src=/img/geert.png alt=avatar style=cursor:pointer>
-</a>
-<p>Geert van der Cruijsen: Lead Consultant @ Xpirit, Public Speaker, Software Developer, Cloud Native Architect, Microsoft MVP</p>
-<ul class=list-inline>
-<li>
-<a href=/index.xml rel=alternate type=application/rss+xml title="The full cycle developer blog">
-<span class="fa-stack fa-lg">
-<i class="fas fa-circle fa-stack-2x"></i>
-<i class="fas fa-rss fa-stack-1x fa-inverse"></i>
-</span>
-</a>
-</li>
-<li>
-<a href=https://twitter.com/geertvdc>
-<span class="fa-stack fa-lg">
-<i class="fas fa-circle fa-stack-2x"></i>
-<i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
-</span>
-</a>
-</li>
-<li>
-<a target=_blank href=https://github.com/geertvdc>
-<span class="fa-stack fa-lg">
-<i class="fas fa-circle fa-stack-2x"></i>
-<i class="fab fa-github fa-stack-1x fa-inverse"></i>
-</span>
-</a>
-</li>
-<li>
-<a target=_blank href=https://www.linkedin.com/in/geertvandercruijsen/>
-<span class="fa-stack fa-lg">
-<i class="fas fa-circle fa-stack-2x"></i>
-<i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
-</span>
-</a>
-</li>
-</ul>
-</div>
-</section>
 <section>
-<hr class="hidden-sm hidden-xs">
+<hr>
 <h5>FRIENDS</h5>
 <ul class=list-inline>
 <li><a target=_blank href=https://Xpirit.com>Xpirit</a></li>
@@ -308,13 +258,14 @@ testing
 </div>
 </div>
 </div>
+</article>
 <footer>
 <div class=container>
 <div class=row>
 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 <ul class="list-inline text-center">
 <li>
-<a href=/index.xml rel=alternate type=application/rss+xml title="The full cycle developer blog">
+<a href rel=alternate type=application/rss+xml title="The full cycle developer blog">
 <span class="fa-stack fa-lg">
 <i class="fas fa-circle fa-stack-2x"></i>
 <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
