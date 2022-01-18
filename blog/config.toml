@@ -5,7 +5,7 @@ theme = 'hugo-theme-cleanwhite'
 preserveTaxonomyNames = true
 paginate = 20 #frontpage pagination
 hasCJKLanguage = true
-googleAnalytics = "UA-217409519-1"
+googleAnalytics = 'UA-217409519-1'
 
 [outputs]
 home = ["HTML", "RSS", "Algolia"]
