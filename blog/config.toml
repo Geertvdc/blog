@@ -36,6 +36,8 @@ home = ["HTML", "RSS", "Algolia"]
   algolia_indexName = "fullcycledeveloper-blog"
   algolia_apiKey = "8f7d4ec457687f7a2788748eb51dfcad" #public api key for search
 
+  googleAnalytics = "UA-217409519-1"
+
   [params.social]
   rss            = true 
   email          = "geert@vdcruijsen.net"
