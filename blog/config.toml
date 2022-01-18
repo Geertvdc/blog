@@ -5,6 +5,7 @@ theme = 'hugo-theme-cleanwhite'
 preserveTaxonomyNames = true
 paginate = 20 #frontpage pagination
 hasCJKLanguage = true
+googleAnalytics = "UA-217409519-1"
 
 [outputs]
 home = ["HTML", "RSS", "Algolia"]
@@ -35,8 +36,6 @@ home = ["HTML", "RSS", "Algolia"]
   algolia_appId = "9AWS4CUHVW"
   algolia_indexName = "fullcycledeveloper-blog"
   algolia_apiKey = "8f7d4ec457687f7a2788748eb51dfcad" #public api key for search
-
-  googleAnalytics = "UA-217409519-1"
 
   [params.social]
   rss            = true 
