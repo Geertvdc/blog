@@ -6,7 +6,7 @@ description: "The first post of my new blog about the fully lifecycle of softwar
 date:       2022-01-14
 author:     "Geert van der Cruijsen"
 URL:        "/2022/01/14/hello-world"
-image:      "img/map.jpg"
+image:      "/img/map.jpg"
 tags:
     - Blog
     - Personal
