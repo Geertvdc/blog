@@ -72,3 +72,15 @@ params = ["categories", "tags"]
   title = "Azure Community Live"
   href =  "https://azure-community.live"
 
+
+[params.giscus]
+  data_repo="geertvdc/geertvdc.github.io"
+  data_repo_id="R_kgDOGqhgLQ"
+  data_category="blog-comments"
+  data_category_id="DIC_kwDOGqhgLc4CAxe7"
+  data_mapping="blog"
+  data_reactions_enabled="1"
+  data_emit_metadata="0"
+  data_theme="light"
+  data_lang="en"
+  crossorigin="anonymous"
