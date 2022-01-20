@@ -21,6 +21,7 @@ home = ["HTML", "RSS", "Algolia"]
   friends = true
   bookmarks = false
   about_me = true
+  banners = true
 
   # Sidebar settings
   sidebar_about_description = "Geert van der Cruijsen: Lead Consultant @ Xpirit, Public Speaker, Software Developer, Cloud Native Architect, Microsoft MVP"
@@ -71,6 +72,19 @@ params = ["categories", "tags"]
   [[params.friend_link]]
   title = "Azure Community Live"
   href =  "https://azure-community.live"
+  [[params.friend_link]]
+  title = "My old blog"
+  href =  "https://mobilefirstcloudfirst.net/"
+
+
+  [[params.banner_link]]
+  title =  "Xpirit Blog"
+  href =  "https://xpirit.com"
+  img = "/img/xpirit-blog-banner.png"
+  [[params.banner_link]]
+  title =  "Microsoft MVP"
+  href =  "https://mvp.microsoft.com"
+  img = "/img/mvp-banner.png"
 
 
 [params.giscus]
