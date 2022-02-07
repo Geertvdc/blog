@@ -1,4 +1,115 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>The full cycle developer blog</title><link>https://fullcycledeveloper.com</link><description>Recent content on The full cycle developer blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 18 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://fullcycledeveloper.com/index.xml" rel="self" type="application/rss+xml"/><item><title>Generating sandbox APIs for your ASP.Net Core Web APIs</title><link>https://fullcycledeveloper.com/2022/01/18/generate-sandbox-apis/</link><pubDate>Tue, 18 Jan 2022 00:00:00 +0000</pubDate><guid>https://fullcycledeveloper.com/2022/01/18/generate-sandbox-apis/</guid><description>&lt;p>When building APIs I often want to share my contract as soon as possible. Especially when you know your consumers and are you&amp;rsquo;re open for feedback and discussion on the contract of the API.&lt;/p>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>The full cycle developer blog</title><link>https://fullcycledeveloper.com</link><description>Recent content on The full cycle developer blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 07 Feb 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://fullcycledeveloper.com/index.xml" rel="self" type="application/rss+xml"/><item><title>Hosting your HUGO blog on Github Pages in 1 hour</title><link>https://fullcycledeveloper.com/2022/02/07/Hosting-hugo-blog-on-github-pages/</link><pubDate>Mon, 07 Feb 2022 00:00:00 +0000</pubDate><guid>https://fullcycledeveloper.com/2022/02/07/Hosting-hugo-blog-on-github-pages/</guid><description>&lt;p>I started this blog a week ago and it&amp;rsquo;s actually my 3rd blog I created. I created my first blog around 2010 as self hosted wordpress website. Then when doing more Azure stuff I wanted to start of with a clean cheat again and created a new blog in 2016 using Wordpress again but then hosted on Azure &lt;a href="https://mobilefirstcloudfirst.net">https://mobilefirstcloudfirst.net&lt;/a>. This worked but I was never happy with it. The last 2 years I didn&amp;rsquo;t blog at all so when I started with my new years resolution of blogging again I decided I needed a new blog, new domain name and something that used markdown for editing.&lt;/p>
+&lt;h2 id="choosing-hugo">Choosing Hugo&lt;/h2>
+&lt;p>I chose Hugo after looking into some of the common blogging platforms that are based on static site generators such as Jekyll and Hugo. After browsing through some of the themes and did some comparison I decided to try out Hugo since it looked more popular and just wanted to see how ard it was.&lt;/p>
+&lt;p>
+&lt;img src="https://fullcycledeveloper.com/img/hugo-logo.svg" alt="HUGO">
+&lt;/p>
+&lt;p>A couple of hours later the website was up and running on my machine and I was already tweaking away at some UI improvements.. Point proven lets see what I needed to do.&lt;/p>
+&lt;h2 id="my-blog-using-hugo-hosted-on-github-pages-what-is-in-the-box">My blog using Hugo hosted on Github Pages, what is in the box?&lt;/h2>
+&lt;p>I wanted to create a blog website that was based on markdown files that i could store in git. I already had some experience with GitHub Pages so I though lets see how hard that is. After a couple of hours I had the followng up and running:&lt;/p>
+&lt;ul>
+&lt;li>Hugo CMS&lt;/li>
+&lt;li>Finding a theme&lt;/li>
+&lt;li>Algolia Search&lt;/li>
+&lt;li>GitHub Pages for hosting&lt;/li>
+&lt;li>Github discussions for comments using Giscuss&lt;/li>
+&lt;li>Automatically deploy using Github Pages&lt;/li>
+&lt;/ul>
+&lt;h3 id="hugo-cms">Hugo CMS&lt;/h3>
+&lt;p>The Hugo CMS was quite easy. I just followed the tutorial on the &lt;a href="https://gohugo.io">Hugo&lt;/a> website to create a new empty website. It took me a couple of minutes.&lt;/p>
+&lt;h3 id="adding-a-theme">Adding a Theme&lt;/h3>
+&lt;p>Hugo has a list of themes on it&amp;rsquo;s &lt;a href="https://themes.gohugo.io/">website&lt;/a>. The &lt;a href="https://themes.gohugo.io/themes/hugo-theme-cleanwhite/">Clean White Hugo Theme&lt;/a> looked quited good so I gave that a go. What I looked for in a theme was a nice clean interface and options for comments + search. This team had it all so I just installed it as a git submodule and when I ran the &lt;code>hugo serve&lt;/code> command it was working from the get go&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">mkdir themes
+git submodule add https://github.com/zhaohuabing/hugo-theme-cleanwhite.git themes/hugo-theme-cleanwhite
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>After my initial playing around with setting up the website I wanted to customize some things so what i did was that I actually forked the github repo and made the changes on my fork. All my changes are open source and can be found on &lt;a href="https://github.com/Geertvdc/hugo-theme-cleanwhite">this repo&lt;/a>&lt;/p>
+&lt;p>Changes that I made are:&lt;/p>
+&lt;ul>
+&lt;li>Showing blog preview / full posts in the homepage instead of the really small summaries.&lt;/li>
+&lt;li>Added headers to the blog preview using images&lt;/li>
+&lt;li>Added an option to show banners on the sidebar.&lt;/li>
+&lt;li>Some small css tweaks&lt;/li>
+&lt;li>Added full posts to the RSS Feed instead of the summary&lt;/li>
+&lt;li>Fixed some issues in the algolia search json that was being generated&lt;/li>
+&lt;/ul>
+&lt;p>All these changes were quite simple without me knowing anything about Hugo, themes or GO templating.&lt;/p>
+&lt;h3 id="algolia-search">Algolia Search&lt;/h3>
+&lt;p>Hugo does not have support for search out of the box by itself. Luckely the theme I chose had this covered and supported search by a free 3rd party service. The only thing that was needed was creating an account and set up the API key and create an index.&lt;/p>
+&lt;p>
+&lt;img src="https://fullcycledeveloper.com/img/Algolia-logo.png" alt="Algolia">
+&lt;/p>
+&lt;p>Algolia works with sending json files to the index. The json files are generated during compilation of the Hugo website and this json can then be uploaded on the website of Algolia for a first test. This manual labor is not something I would prefer so I automated this in the next step where I also deploy everything to Github Pages.&lt;/p>
+&lt;h3 id="deploying-every-commit-to-github-pages-and-host-it-on-my-custom-domain">Deploying every commit to Github Pages and host it on my custom domain&lt;/h3>
+&lt;p>
+&lt;img src="https://fullcycledeveloper.com/img/gh-actions-pages.png" alt="Github Actions &amp;#43; Pages">
+&lt;/p>
+&lt;p>I&amp;rsquo;m a developer so I wanted a fully automated workflow. My content is stored in a git repo on Github and I wanted that every commit I made to &lt;code>main&lt;/code> would be automatically deployed to the website.&lt;/p>
+&lt;p>GitHub offers this flow with no effort for Jekyll but for HUGO some small additions needed to be done. Before we create our workflow we need to add a specific file to our repo called &lt;code>CNAME&lt;/code> so github pages links this page to our custom domain.&lt;/p>
+&lt;h4 id="cname-file">CNAME File&lt;/h4>
+&lt;p>When you change the domain name for your website hosted using GitHub pages Github automatically creates a commit with a CNAME file in it. This file is used by GitHub to know which domain name is used for the website. Since my workflow was pushing all contents of the &lt;code>./public&lt;/code> folder GitHub was actually removing this file every time after the Hugo workflow ran. Manually adding the CNAME file to the &lt;code>static&lt;/code> folder helped solve this issue.&lt;/p>
+&lt;p>My CNAME file content:&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-CNAME" data-lang="CNAME">fullcycledeveloper.com
+&lt;/code>&lt;/pre>&lt;p>Now that everything is ready we can create our workflow file. My file looks like this, The steps are quite self explanatory but I&amp;rsquo;ve added some comments below each action to explain what I&amp;rsquo;m doing.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-Yaml" data-lang="Yaml">&lt;span style="color:#ff79c6">name&lt;/span>: github pages &lt;span style="color:#6272a4"># Name of the workflow&lt;/span>
+&lt;span style="color:#ff79c6">on&lt;/span>:
+&lt;span style="color:#ff79c6">push&lt;/span>:
+&lt;span style="color:#ff79c6">branches&lt;/span>:
+- main
+&lt;span style="color:#ff79c6">pull_request&lt;/span>:
+&lt;span style="color:#ff79c6">jobs&lt;/span>:
+&lt;span style="color:#ff79c6">build&lt;/span>:
+&lt;span style="color:#ff79c6">runs-on&lt;/span>: ubuntu-latest
+&lt;span style="color:#ff79c6">defaults&lt;/span>:
+&lt;span style="color:#ff79c6">run&lt;/span>:
+&lt;span style="color:#ff79c6">working-directory&lt;/span>: blog
+&lt;span style="color:#ff79c6">steps&lt;/span>:
+- &lt;span style="color:#ff79c6">uses&lt;/span>: actions/checkout@v2
+&lt;span style="color:#ff79c6">with&lt;/span>:
+&lt;span style="color:#ff79c6">submodules&lt;/span>: &lt;span style="color:#ff79c6">true&lt;/span> &lt;span style="color:#6272a4"># Fetch Hugo themes (true OR recursive)&lt;/span>
+&lt;span style="color:#ff79c6">fetch-depth&lt;/span>: &lt;span style="color:#bd93f9">0&lt;/span> &lt;span style="color:#6272a4"># Fetch all history for .GitInfo and .Lastmod&lt;/span>
+- &lt;span style="color:#ff79c6">name&lt;/span>: Setup Hugo
+&lt;span style="color:#ff79c6">uses&lt;/span>: peaceiris/actions-hugo@v2
+&lt;span style="color:#ff79c6">with&lt;/span>:
+&lt;span style="color:#ff79c6">hugo-version&lt;/span>: &lt;span style="color:#f1fa8c">&amp;#39;latest&amp;#39;&lt;/span>
+&lt;span style="color:#6272a4"># Downloads &amp;amp; installs HUGO cli&lt;/span>
+- &lt;span style="color:#ff79c6">name&lt;/span>: Build
+&lt;span style="color:#ff79c6">run&lt;/span>: hugo --minify
+&lt;span style="color:#6272a4"># Do a HUGO build of your markdown files to generate a stetic website that is stored in the `./public` folder&lt;/span>
+- &lt;span style="color:#ff79c6">name&lt;/span>: Deploy
+&lt;span style="color:#ff79c6">uses&lt;/span>: peaceiris/actions-gh-pages@v3
+&lt;span style="color:#ff79c6">if&lt;/span>: github.ref == &amp;#39;refs/heads/main&amp;#39;
+&lt;span style="color:#ff79c6">with&lt;/span>:
+&lt;span style="color:#ff79c6">github_token&lt;/span>: ${{ secrets.GITHUB_TOKEN }}
+&lt;span style="color:#ff79c6">publish_dir&lt;/span>: ./blog/public
+&lt;span style="color:#6272a4"># takes the public folder and pushes the changes to a new branch called gh-pages&lt;/span>
+- &lt;span style="color:#ff79c6">uses&lt;/span>: wangchucheng/algolia-uploader@master
+&lt;span style="color:#ff79c6">with&lt;/span>:
+&lt;span style="color:#ff79c6">app_id&lt;/span>: 9AWS4CUHVW
+&lt;span style="color:#ff79c6">admin_key&lt;/span>: ${{ secrets.ALGOLIA_ADMIN_KEY }}
+&lt;span style="color:#ff79c6">index_name&lt;/span>: fullcycledeveloper-blog
+&lt;span style="color:#ff79c6">index_file_path&lt;/span>: ./blog/public/algolia.json
+&lt;span style="color:#6272a4"># Uploads the algolia json file to the index on algolia website&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>After each commit the generated website is pushed to the &lt;code>gh-pages&lt;/code> branch. From here we can enable Github Pages in the Settings menu of the repository. Point it to the right branch and connect the domain name that you specified in the CNAME file. You&amp;rsquo;ll have to do some DNS settings to make sure you are the actual owner of that domain and voila your website is ready to go!&lt;/p>
+&lt;p>
+&lt;img src="https://fullcycledeveloper.com/img/gh-pages-settings.png" alt="Github Pages settings">
+&lt;/p>
+&lt;h3 id="adding-comments-to-the-posts-using-giscuss-based-on-github-discussions">Adding comments to the posts using Giscuss (based on Github Discussions)&lt;/h3>
+&lt;p>A static website by default is just static.. That is ok for most scenarios but for a blog I wanted to add comments to the posts. I used Giscuss to do that. The Hugo Theme I used (&lt;a href="https://themes.gohugo.io/themes/hugo-theme-cleanwhite/">Clean White Hugo Theme&lt;/a> ) has built in support for multiple comment systems. Since my main target audience is developers I chose Giscuss as the comment system.&lt;/p>
+&lt;p>The only thing i needed to do is set the properties to the right Github Discussions space in my configuration .toml file.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-toml" data-lang="toml">[params.giscus]
+data_repo=&lt;span style="color:#f1fa8c">&amp;#34;geertvdc/geertvdc.github.io&amp;#34;&lt;/span>
+data_repo_id=&lt;span style="color:#f1fa8c">&amp;#34;&amp;lt;REPO_ID&amp;gt;&amp;#34;&lt;/span>
+data_category=&lt;span style="color:#f1fa8c">&amp;#34;blog-comments&amp;#34;&lt;/span>
+data_category_id=&lt;span style="color:#f1fa8c">&amp;#34;&amp;lt;CATEGORY_ID&amp;gt;&amp;#34;&lt;/span>
+data_mapping=&lt;span style="color:#f1fa8c">&amp;#34;blog&amp;#34;&lt;/span>
+data_reactions_enabled=&lt;span style="color:#f1fa8c">&amp;#34;1&amp;#34;&lt;/span>
+data_emit_metadata=&lt;span style="color:#f1fa8c">&amp;#34;0&amp;#34;&lt;/span>
+data_theme=&lt;span style="color:#f1fa8c">&amp;#34;light&amp;#34;&lt;/span>
+data_lang=&lt;span style="color:#f1fa8c">&amp;#34;en&amp;#34;&lt;/span>
+crossorigin=&lt;span style="color:#f1fa8c">&amp;#34;anonymous&amp;#34;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>After doing that it just works! I didn&amp;rsquo;t have to sign up for any new platform since my code is already on Github and now everything is in the same place.&lt;/p>
+&lt;p>Hopefully this helps people set up a simple blog website as well. I&amp;rsquo;m really happy in how it turned out and it really was a breeze to set it up.&lt;/p>
+&lt;p>Happy Blogging!&lt;/p>
+&lt;p>Geert van der Cruijsen&lt;/p></description></item><item><title>Generating sandbox APIs for your ASP.Net Core Web APIs</title><link>https://fullcycledeveloper.com/2022/01/18/generate-sandbox-apis/</link><pubDate>Tue, 18 Jan 2022 00:00:00 +0000</pubDate><guid>https://fullcycledeveloper.com/2022/01/18/generate-sandbox-apis/</guid><description>&lt;p>When building APIs I often want to share my contract as soon as possible. Especially when you know your consumers and are you&amp;rsquo;re open for feedback and discussion on the contract of the API.&lt;/p>
 &lt;h2 id="contract-first-or-code-first">Contract first or Code first?&lt;/h2>
 &lt;p>Although I want to share my contract as soon as possible I don&amp;rsquo;t like these API contract designer tools. My approach is often just creating an empty API in Asp.Net Core by defining the controllers and classes that define the contract. Adding &lt;a href="https://github.com/domaindrivendev/Swashbuckle.AspNetCore">Swashbuckle&lt;/a> to your project will generate a Swagger file / Open API Spec based on the controllers and classes that you can use to document your API.&lt;/p>
 &lt;h2 id="giving-your-consumers-a-testable-solution-as-soon-as-possible">Giving your consumers a testable solution as soon as possible&lt;/h2>

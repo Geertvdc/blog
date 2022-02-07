@@ -7,17 +7,17 @@
 <meta property="og:type" content="article">
 <meta property="og:image" content="https://fullcycledeveloper.com/img/home.jpg">
 <meta property="twitter:image" content="https://fullcycledeveloper.com/img/home.jpg">
-<meta name=title content="Blog">
-<meta property="og:title" content="Blog">
-<meta property="twitter:title" content="Blog">
-<meta name=description content="A blog by Geert van der Cruijsen about all aspects of software development">
-<meta property="og:description" content="A blog by Geert van der Cruijsen about all aspects of software development">
-<meta property="twitter:description" content="A blog by Geert van der Cruijsen about all aspects of software development">
+<meta name=title content="Hosting your HUGO blog on Github Pages in 1 hour">
+<meta property="og:title" content="Hosting your HUGO blog on Github Pages in 1 hour">
+<meta property="twitter:title" content="Hosting your HUGO blog on Github Pages in 1 hour">
+<meta name=description content="Setting up a blog can be a burden so I searched for the easiest way to host my blog as a developer. In this blog I'll explain how I've set up my blog using Hugo including comments and search and have it automatically update every time I make a change.">
+<meta property="og:description" content="Setting up a blog can be a burden so I searched for the easiest way to host my blog as a developer. In this blog I'll explain how I've set up my blog using Hugo including comments and search and have it automatically update every time I make a change.">
+<meta property="twitter:description" content="Setting up a blog can be a burden so I searched for the easiest way to host my blog as a developer. In this blog I'll explain how I've set up my blog using Hugo including comments and search and have it automatically update every time I make a change.">
 <meta property="twitter:card" content="summary">
 <meta name=keyword content="software development, developer, cloud, cloud native, azure, microsoft, microservices, agile, engineering culture">
 <link rel="shortcut icon" href=/img/favicon.ico>
-<title>Blog-The full cycle developer blog</title>
-<link rel=canonical href=/tags/blog/>
+<title>Hosting your HUGO blog on Github Pages in 1 hour-The full cycle developer blog</title>
+<link rel=canonical href=/2022/02/07/Hosting-hugo-blog-on-github-pages>
 <link rel=stylesheet href=/css/iDisqus.min.css>
 <link rel=stylesheet href=/css/bootstrap.min.css>
 <link rel=stylesheet href=/css/hugo-theme-cleanwhite.min.css>
@@ -55,40 +55,45 @@
 </div>
 </nav>
 <script>var $body=document.body,$toggle=document.querySelector('.navbar-toggle'),$navbar=document.querySelector('#huxblog_navbar'),$collapse=document.querySelector('.navbar-collapse');$toggle.addEventListener('click',handleMagic);function handleMagic(a){$navbar.className.indexOf('in')>0?($navbar.className=" ",setTimeout(function(){$navbar.className.indexOf('in')<0&&($collapse.style.height="0px")},400)):($collapse.style.height="auto",$navbar.className+=" in")}</script>
-<header class=intro-header style=background-image:url(/img/home.jpg)>
+<style type=text/css>header.intro-header{background-image:url(/img/notes.jpg)}</style>
+<header class=intro-header>
 <div class=container>
 <div class=row>
 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-<div class=site-heading>
-<h1>The full cycle developer blog </h1>
-<span class=subheading>A blog by Geert van der Cruijsen about everything software development related</span>
+<div class=post-heading>
+<div class=tags>
+<a class=tag href=/tags/blog title=Blog>
+Blog
+</a>
+<a class=tag href=/tags/github title=Github>
+Github
+</a>
+<a class=tag href=/tags/hugo title=Hugo>
+Hugo
+</a>
+<a class=tag href=/tags/cicd title=CICD>
+CICD
+</a>
+</div>
+<h1>Hosting your HUGO blog on Github Pages in 1 hour</h1>
+<h2 class=subheading>How to get a Hugo blog up and running with Search and comments for free within an hour</h2>
+<span class=meta>
+Posted by
+Geert van der Cruijsen
+on
+Monday, February 7, 2022
+</span>
 </div>
 </div>
 </div>
 </div>
 </header>
+<article>
 <div class=container>
 <div class=row>
-<div class="col-lg-8 col-lg-offset-1
-col-md-8 col-md-offset-1
-col-sm-12
-col-xs-12
+<div class="col-lg-8 col-lg-offset-2
+col-md-10 col-md-offset-1
 post-container">
-<div class="post-preview post-preview-box">
-<div class="post-preview post-preview-container" style=background-image:url(/img/notes.jpg);background-size:cover>
-<a href=https://fullcycledeveloper.com/2022/02/07/Hosting-hugo-blog-on-github-pages/>
-<h1 class=post-title>
-Hosting your HUGO blog on Github Pages in 1 hour
-</h1>
-<h2 class=post-subtitle>
-How to get a Hugo blog up and running with Search and comments for free within an hour
-</h2>
-</a>
-<p class=post-meta>
-Posted by Geert van der Cruijsen Monday, February 7, 2022
-</p>
-</div>
-<div class=post-preview>
 <p>I started this blog a week ago and it&rsquo;s actually my 3rd blog I created. I created my first blog around 2010 as self hosted wordpress website. Then when doing more Azure stuff I wanted to start of with a clean cheat again and created a new blog in 2016 using Wordpress again but then hosted on Azure <a href=https://mobilefirstcloudfirst.net>https://mobilefirstcloudfirst.net</a>. This worked but I was never happy with it. The last 2 years I didn&rsquo;t blog at all so when I started with my new years resolution of blogging again I decided I needed a new blog, new domain name and something that used markdown for editing.</p>
 <h2 id=choosing-hugo>Choosing Hugo</h2>
 <p>I chose Hugo after looking into some of the common blogging platforms that are based on static site generators such as Jekyll and Hugo. After browsing through some of the themes and did some comparison I decided to try out Hugo since it looked more popular and just wanted to see how ard it was.</p>
@@ -208,49 +213,33 @@ git submodule add https://github.com/zhaohuabing/hugo-theme-cleanwhite.git theme
 <p>Hopefully this helps people set up a simple blog website as well. I&rsquo;m really happy in how it turned out and it really was a breeze to set it up.</p>
 <p>Happy Blogging!</p>
 <p>Geert van der Cruijsen</p>
-</div>
-</div>
 <hr>
-<div class="post-preview post-preview-box">
-<div class="post-preview post-preview-container" style=background-image:url(/img/map.jpg);background-size:cover>
-<a href=https://fullcycledeveloper.com/2022/01/14/hello-world/>
-<h1 class=post-title>
-Hello world!
-</h1>
-<h2 class=post-subtitle>
-Welcome to the new blog by Geert van der Cruijsen about Software development
-</h2>
-</a>
-<p class=post-meta>
-Posted by Geert van der Cruijsen Friday, January 14, 2022
-</p>
+<ul class=pager>
+<li class=previous>
+<a href=/2022/01/18/generate-sandbox-apis data-toggle=tooltip data-placement=top title="Generating sandbox APIs for your ASP.Net Core Web APIs">&larr;
+Previous Post</a>
+</li>
+</ul>
+<script src=https://giscus.app/client.js data-repo=geertvdc/geertvdc.github.io data-repo-id=R_kgDOGqhgLQ data-category=blog-comments data-category-id=DIC_kwDOGqhgLc4CAxe7 data-mapping=blog data-reactions-enabled=1 data-emit-metadata=0 data-theme=light data-lang=en crossorigin=anonymous async></script>
 </div>
-<div class=post-preview>
-<p>As a software developer there is only 1 title you can use to create your first post on a new blog. &ldquo;Hello World!&rdquo;. 👋</p>
-<h3 id=so-why-this-blog>So why this blog?</h3>
-<p>It&rsquo;s actually my 3rd blog website I created. I started of years ago with a blog using Wordpress that I hosted myself. Then about 6 years ago I was working a lot with Azure and wanted to move away from self hosting so I created a new blog (still using Wordpress) but then hosted on Azure. This worked quite well at that time but I lost passion for blogging a couple of years ago.</p>
-<p>Now I wanted to start writing some blogposts again so I had 2 options: dust of my old blog or create a new one. I never really liked the whole Wordpress experience and wanted to move to a static site generator so this was the right time to make the switch to <a href=https://gohugo.io/>Hugo</a> hosted on <a href=https://pages.github.com/>Github Pages</a>.</p>
-<p>The source of this blog can be found here on my <a href=https://github.com/geertvdc/geertvdc.github.io>Github Repo: Geertvdc/geertvdc.github.io</a>.</p>
-<h3 id=full-cycle-developer>Full cycle developer?</h3>
-<p>As my dayjob I work as a Senior Consultant at Xpirit where I help companies build better software. I do this by improving the Engineering culture, introduce new technology and coaching employees from CTOs to Developers. I believe that building the best software is done by teams who follow the DevOps mantra: &ldquo;You build it, you run it!&rdquo;. I love this mantra and try to improve teams on all aspects from architecture, design, implementation, testing, deployments, maintenance, and support. That&rsquo;s why I called this blog &ldquo;The full cycle developer blog&rdquo;.</p>
-<h3 id=sharing-knowledge>Sharing Knowledge</h3>
-<p>Sharing Knowledge is one of my passions. Either by writing articles or blogposts but also by public speaking at international conferences and meetups.</p>
-<h3 id=what-to-expect-on-this-blog>What to expect on this blog?</h3>
-<p>Posts by me on this blog can cover all aspects of software development from technical posts about a certain technology to non technical posts about organizational culture or personal development.</p>
-<h3 id=so-who-am-i>So who am I?</h3>
-<p>My name is Geert van der Cruijsen. I&rsquo;m a senior consultant working at Xpirit in the Netherlands but more important i&rsquo;m also a husband of my wife Patty and father of my daughters Lauren & Amber.</p>
+<div class="col-lg-2 col-lg-offset-0
+visible-lg-block
+sidebar-container
+catalog-container">
+<div class=side-catalog>
+<hr class="hidden-sm hidden-xs">
+<h5>
+<a class=catalog-toggle href=#>CATALOG</a>
+</h5>
+<ul class=catalog-body></ul>
 </div>
 </div>
-<hr>
-</div>
-<div class="col-lg-3 col-lg-offset-0
-col-md-3 col-md-offset-0
-col-sm-12
-col-xs-12
+<div class="col-lg-8 col-lg-offset-2
+col-md-10 col-md-offset-1
 sidebar-container">
 <section>
 <hr class="hidden-sm hidden-xs">
-<h5>FEATURED TAGS</h5>
+<h5><a href=/tags/>FEATURED TAGS</a></h5>
 <div class=tags>
 <a href=/tags/.net title=.net>
 .net
@@ -287,51 +276,8 @@ testing
 </a>
 </div>
 </section>
-<section class="visible-md visible-lg">
-<hr><h5><a href=/top/about>ABOUT ME</a></h5>
-<div class=short-about>
-<a href=/top/about>
-<img src=/img/geert.png alt=avatar style=cursor:pointer>
-</a>
-<p>Geert van der Cruijsen: Lead Consultant @ Xpirit, Public Speaker, Software Developer, Cloud Native Architect, Microsoft MVP</p>
-<ul class=list-inline>
-<li>
-<a href=/tags/blog/index.xml rel=alternate type=application/rss+xml title="The full cycle developer blog">
-<span class="fa-stack fa-lg">
-<i class="fas fa-circle fa-stack-2x"></i>
-<i class="fas fa-rss fa-stack-1x fa-inverse"></i>
-</span>
-</a>
-</li>
-<li>
-<a href=https://twitter.com/geertvdc>
-<span class="fa-stack fa-lg">
-<i class="fas fa-circle fa-stack-2x"></i>
-<i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
-</span>
-</a>
-</li>
-<li>
-<a target=_blank href=https://github.com/geertvdc>
-<span class="fa-stack fa-lg">
-<i class="fas fa-circle fa-stack-2x"></i>
-<i class="fab fa-github fa-stack-1x fa-inverse"></i>
-</span>
-</a>
-</li>
-<li>
-<a target=_blank href=https://www.linkedin.com/in/geertvandercruijsen/>
-<span class="fa-stack fa-lg">
-<i class="fas fa-circle fa-stack-2x"></i>
-<i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
-</span>
-</a>
-</li>
-</ul>
-</div>
-</section>
 <section>
-<hr class="hidden-sm hidden-xs">
+<hr>
 <h5>FRIENDS</h5>
 <ul class=list-inline>
 <li><a target=_blank href=https://Xpirit.com>Xpirit</a></li>
@@ -339,23 +285,17 @@ testing
 <li><a target=_blank href=https://mobilefirstcloudfirst.net/>My old blog</a></li>
 </ul>
 </section>
-<section>
-<hr>
-<ul class=list-inline>
-<li><a target=_blank href=https://xpirit.com><img src=/img/xpirit-blog-banner.png class=sidebar-banner-img></a></li>
-<li><a target=_blank href=https://mvp.microsoft.com><img src=/img/mvp-banner.png class=sidebar-banner-img></a></li>
-</ul>
-</section>
 </div>
 </div>
 </div>
+</article>
 <footer>
 <div class=container>
 <div class=row>
 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 <ul class="list-inline text-center">
 <li>
-<a href=/tags/blog/index.xml rel=alternate type=application/rss+xml title="The full cycle developer blog">
+<a href rel=alternate type=application/rss+xml title="The full cycle developer blog">
 <span class="fa-stack fa-lg">
 <i class="fas fa-circle fa-stack-2x"></i>
 <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
