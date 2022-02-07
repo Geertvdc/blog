@@ -1,9 +1,9 @@
 ---
 layout:     post
-title:      "Hosting your Hugo blog on Github Pages"
+title:      "Hosting your HUGO blog on Github Pages in 1 hour"
 subtitle:   "How to get a Hugo blog up and running with Search and comments for free within an hour"
 description: "Setting up a blog can be a burden so I searched for the easiest way to host my blog as a developer. In this blog I'll explain how I've set up my blog using Hugo including comments and search and have it automatically update every time I make a change."
-date:     2022-01-28
+date:     2022-02-07
 author:     "Geert van der Cruijsen"
 image: "/img/notes.jpg"
 tags:
@@ -11,7 +11,7 @@ tags:
     - Github
     - Hugo
     - CICD
-URL: "/2022/01/28/Hosting-hugo-blog-on-github-pages"
+URL: "/2022/02/07/Hosting-hugo-blog-on-github-pages"
 ---
 
 I started this blog a week ago and it's actually my 3rd blog I created. I created my first blog around 2010 as self hosted wordpress website. Then when doing more Azure stuff I wanted to start of with a clean cheat again and created a new blog in 2016 using Wordpress again but then hosted on Azure [https://mobilefirstcloudfirst.net](https://mobilefirstcloudfirst.net). This worked but I was never happy with it. The last 2 years I didn't blog at all so when I started with my new years resolution of blogging again I decided I needed a new blog, new domain name and something that used markdown for editing.
@@ -71,7 +71,7 @@ Algolia works with sending json files to the index. The json files are generated
 
 I'm a developer so I wanted a fully automated workflow. My content is stored in a git repo on Github and I wanted that every commit I made to `main` would be automatically deployed to the website.
 
-GitHub offers this flow with no effort for Jekyll but for HUGO some small additions needed to be done. First of all enable Github Pages
+GitHub offers this flow with no effort for Jekyll but for HUGO some small additions needed to be done. Before we create our workflow we need to add a specific file to our repo called `CNAME` so github pages links this page to our custom domain.
 
 #### CNAME File
 When you change the domain name for your website hosted using GitHub pages Github automatically creates a commit with a CNAME file in it. This file is used by GitHub to know which domain name is used for the website. Since my workflow was pushing all contents of the `./public` folder GitHub was actually removing this file every time after the Hugo workflow ran. Manually adding the CNAME file to the `static` folder helped solve this issue.
@@ -81,6 +81,85 @@ My CNAME file content:
 fullcycledeveloper.com
 ```
 
+Now that everything is ready we can create our workflow file. My file looks like this, The steps are quite self explanatory but I've added some comments below each action to explain what I'm doing.
+
+```Yaml
+name: github pages # Name of the workflow
+
+on:
+  push:
+    branches:
+      - main
+  pull_request: 
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: blog
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true  # Fetch Hugo themes (true OR recursive)
+          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: 'latest'
+        # Downloads & installs HUGO cli
+
+      - name: Build
+        run: hugo --minify
+        # Do a HUGO build of your markdown files to generate a stetic website that is stored in the `./public` folder
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/main'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./blog/public
+        # takes the public folder and pushes the changes to a new branch called gh-pages
+          
+      - uses: wangchucheng/algolia-uploader@master
+        with:
+          app_id: 9AWS4CUHVW
+          admin_key: ${{ secrets.ALGOLIA_ADMIN_KEY }}
+          index_name: fullcycledeveloper-blog
+          index_file_path: ./blog/public/algolia.json
+        # Uploads the algolia json file to the index on algolia website
+```
+
+After each commit the generated website is pushed to the `gh-pages` branch. From here we can enable Github Pages in the Settings menu of the repository. Point it to the right branch and connect the domain name that you specified in the CNAME file. You'll have to do some DNS settings to make sure you are the actual owner of that domain and voila your website is ready to go!
+
+![Github Pages settings](/img/gh-pages-settings.png)
+
+
 ### Adding comments to the posts using Giscuss (based on Github Discussions)
+A static website by default is just static.. That is ok for most scenarios but for a blog I wanted to add comments to the posts. I used Giscuss to do that. The Hugo Theme I used ([Clean White Hugo Theme](https://themes.gohugo.io/themes/hugo-theme-cleanwhite/) ) has built in support for multiple comment systems. Since my main target audience is developers I chose Giscuss as the comment system.
+
+The only thing i needed to do is set the properties to the right Github Discussions space in my configuration .toml file.
+
+```toml
+[params.giscus]
+  data_repo="geertvdc/geertvdc.github.io"
+  data_repo_id="<REPO_ID>"
+  data_category="blog-comments"
+  data_category_id="<CATEGORY_ID>"
+  data_mapping="blog"
+  data_reactions_enabled="1"
+  data_emit_metadata="0"
+  data_theme="light"
+  data_lang="en"
+  crossorigin="anonymous"
+
+```
+
+After doing that it just works! I didn't have to sign up for any new platform since my code is already on Github and now everything is in the same place.
+
+Hopefully this helps people set up a simple blog website as well. I'm really happy in how it turned out and it really was a breeze to set it up.
+
+Happy Blogging!
 
 Geert van der Cruijsen
