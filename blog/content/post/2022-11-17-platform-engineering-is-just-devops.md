@@ -10,6 +10,7 @@ tags:
     - Blog
     - DevOps
     - Platform Engineering
+    - SRE
     - CICD
 URL: "/2022/11/17/platform-engineering-is-just-devops"
 ---
