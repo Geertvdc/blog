@@ -7,17 +7,17 @@
 <meta property="og:type" content="article">
 <meta property="og:image" content="https://fullcycledeveloper.com/img/home.jpg">
 <meta property="twitter:image" content="https://fullcycledeveloper.com/img/home.jpg">
-<meta name=title content="CICD">
-<meta property="og:title" content="CICD">
-<meta property="twitter:title" content="CICD">
+<meta name=title content="DevOps">
+<meta property="og:title" content="DevOps">
+<meta property="twitter:title" content="DevOps">
 <meta name=description content="A blog by Geert van der Cruijsen about all aspects of software development">
 <meta property="og:description" content="A blog by Geert van der Cruijsen about all aspects of software development">
 <meta property="twitter:description" content="A blog by Geert van der Cruijsen about all aspects of software development">
 <meta property="twitter:card" content="summary">
 <meta name=keyword content="software development, developer, cloud, cloud native, azure, microsoft, microservices, agile, engineering culture">
 <link rel="shortcut icon" href=/img/favicon.ico>
-<title>CICD-The full cycle developer blog</title>
-<link rel=canonical href=/tags/cicd/>
+<title>DevOps-The full cycle developer blog</title>
+<link rel=canonical href=/tags/devops/>
 <link rel=stylesheet href=/css/iDisqus.min.css>
 <link rel=stylesheet href=/css/bootstrap.min.css>
 <link rel=stylesheet href=/css/hugo-theme-cleanwhite.min.css>
@@ -141,143 +141,6 @@ Posted by Geert van der Cruijsen Thursday, November 17, 2022
 </div>
 </div>
 <hr>
-<div class="post-preview post-preview-box">
-<div class="post-preview post-preview-container" style=background-image:url(/img/notes.jpg);background-size:cover>
-<a href=https://fullcycledeveloper.com/2022/02/07/Hosting-hugo-blog-on-github-pages/>
-<h1 class=post-title>
-Hosting your HUGO blog on Github Pages in 1 hour
-</h1>
-<h2 class=post-subtitle>
-How to get a Hugo blog up and running with Search and comments for free within an hour
-</h2>
-</a>
-<p class=post-meta>
-Posted by Geert van der Cruijsen Monday, February 7, 2022
-</p>
-</div>
-<div class=post-preview>
-<p>I started this blog a week ago and it&rsquo;s actually my 3rd blog I created. I created my first blog around 2010 as self hosted wordpress website. Then when doing more Azure stuff I wanted to start of with a clean cheat again and created a new blog in 2016 using Wordpress again but then hosted on Azure <a href=https://mobilefirstcloudfirst.net>https://mobilefirstcloudfirst.net</a>. This worked but I was never happy with it. The last 2 years I didn&rsquo;t blog at all so when I started with my new years resolution of blogging again I decided I needed a new blog, new domain name and something that used markdown for editing.</p>
-<h2 id=choosing-hugo>Choosing Hugo</h2>
-<p>I chose Hugo after looking into some of the common blogging platforms that are based on static site generators such as Jekyll and Hugo. After browsing through some of the themes and did some comparison I decided to try out Hugo since it looked more popular and just wanted to see how ard it was.</p>
-<p>
-<img src=/img/hugo-logo.svg alt=HUGO>
-</p>
-<p>A couple of hours later the website was up and running on my machine and I was already tweaking away at some UI improvements.. Point proven lets see what I needed to do.</p>
-<h2 id=my-blog-using-hugo-hosted-on-github-pages-what-is-in-the-box>My blog using Hugo hosted on Github Pages, what is in the box?</h2>
-<p>I wanted to create a blog website that was based on markdown files that i could store in git. I already had some experience with GitHub Pages so I though lets see how hard that is. After a couple of hours I had the followng up and running:</p>
-<ul>
-<li>Hugo CMS</li>
-<li>Finding a theme</li>
-<li>Algolia Search</li>
-<li>GitHub Pages for hosting</li>
-<li>Github discussions for comments using Giscuss</li>
-<li>Automatically deploy using Github Pages</li>
-</ul>
-<h3 id=hugo-cms>Hugo CMS</h3>
-<p>The Hugo CMS was quite easy. I just followed the tutorial on the <a href=https://gohugo.io>Hugo</a> website to create a new empty website. It took me a couple of minutes.</p>
-<h3 id=adding-a-theme>Adding a Theme</h3>
-<p>Hugo has a list of themes on it&rsquo;s <a href=https://themes.gohugo.io/>website</a>. The <a href=https://themes.gohugo.io/themes/hugo-theme-cleanwhite/>Clean White Hugo Theme</a> looked quited good so I gave that a go. What I looked for in a theme was a nice clean interface and options for comments + search. This team had it all so I just installed it as a git submodule and when I ran the <code>hugo serve</code> command it was working from the get go</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>mkdir themes
-git submodule add https://github.com/zhaohuabing/hugo-theme-cleanwhite.git themes/hugo-theme-cleanwhite
-</code></pre></div><p>After my initial playing around with setting up the website I wanted to customize some things so what i did was that I actually forked the github repo and made the changes on my fork. All my changes are open source and can be found on <a href=https://github.com/Geertvdc/hugo-theme-cleanwhite>this repo</a></p>
-<p>Changes that I made are:</p>
-<ul>
-<li>Showing blog preview / full posts in the homepage instead of the really small summaries.</li>
-<li>Added headers to the blog preview using images</li>
-<li>Added an option to show banners on the sidebar.</li>
-<li>Some small css tweaks</li>
-<li>Added full posts to the RSS Feed instead of the summary</li>
-<li>Fixed some issues in the algolia search json that was being generated</li>
-</ul>
-<p>All these changes were quite simple without me knowing anything about Hugo, themes or GO templating.</p>
-<h3 id=algolia-search>Algolia Search</h3>
-<p>Hugo does not have support for search out of the box by itself. Luckely the theme I chose had this covered and supported search by a free 3rd party service. The only thing that was needed was creating an account and set up the API key and create an index.</p>
-<p>
-<img src=/img/Algolia-logo.png alt=Algolia>
-</p>
-<p>Algolia works with sending json files to the index. The json files are generated during compilation of the Hugo website and this json can then be uploaded on the website of Algolia for a first test. This manual labor is not something I would prefer so I automated this in the next step where I also deploy everything to Github Pages.</p>
-<h3 id=deploying-every-commit-to-github-pages-and-host-it-on-my-custom-domain>Deploying every commit to Github Pages and host it on my custom domain</h3>
-<p>
-<img src=/img/gh-actions-pages.png alt="Github Actions + Pages">
-</p>
-<p>I&rsquo;m a developer so I wanted a fully automated workflow. My content is stored in a git repo on Github and I wanted that every commit I made to <code>main</code> would be automatically deployed to the website.</p>
-<p>GitHub offers this flow with no effort for Jekyll but for HUGO some small additions needed to be done. Before we create our workflow we need to add a specific file to our repo called <code>CNAME</code> so github pages links this page to our custom domain.</p>
-<h4 id=cname-file>CNAME File</h4>
-<p>When you change the domain name for your website hosted using GitHub pages Github automatically creates a commit with a CNAME file in it. This file is used by GitHub to know which domain name is used for the website. Since my workflow was pushing all contents of the <code>./public</code> folder GitHub was actually removing this file every time after the Hugo workflow ran. Manually adding the CNAME file to the <code>static</code> folder helped solve this issue.</p>
-<p>My CNAME file content:</p>
-<pre tabindex=0><code class=language-CNAME data-lang=CNAME>fullcycledeveloper.com
-</code></pre><p>Now that everything is ready we can create our workflow file. My file looks like this, The steps are quite self explanatory but I&rsquo;ve added some comments below each action to explain what I&rsquo;m doing.</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Yaml data-lang=Yaml><span style=color:#ff79c6>name</span>: github pages <span style=color:#6272a4># Name of the workflow</span>
-
-<span style=color:#ff79c6>on</span>:
-  <span style=color:#ff79c6>push</span>:
-    <span style=color:#ff79c6>branches</span>:
-      - main
-  <span style=color:#ff79c6>pull_request</span>: 
-
-<span style=color:#ff79c6>jobs</span>:
-  <span style=color:#ff79c6>build</span>:
-    <span style=color:#ff79c6>runs-on</span>: ubuntu-latest
-    <span style=color:#ff79c6>defaults</span>:
-      <span style=color:#ff79c6>run</span>:
-        <span style=color:#ff79c6>working-directory</span>: blog
-    <span style=color:#ff79c6>steps</span>:
-      - <span style=color:#ff79c6>uses</span>: actions/checkout@v2
-        <span style=color:#ff79c6>with</span>:
-          <span style=color:#ff79c6>submodules</span>: <span style=color:#ff79c6>true</span>  <span style=color:#6272a4># Fetch Hugo themes (true OR recursive)</span>
-          <span style=color:#ff79c6>fetch-depth</span>: <span style=color:#bd93f9>0</span>    <span style=color:#6272a4># Fetch all history for .GitInfo and .Lastmod</span>
-
-      - <span style=color:#ff79c6>name</span>: Setup Hugo
-        <span style=color:#ff79c6>uses</span>: peaceiris/actions-hugo@v2
-        <span style=color:#ff79c6>with</span>:
-          <span style=color:#ff79c6>hugo-version</span>: <span style=color:#f1fa8c>&#39;latest&#39;</span>
-        <span style=color:#6272a4># Downloads &amp; installs HUGO cli</span>
-
-      - <span style=color:#ff79c6>name</span>: Build
-        <span style=color:#ff79c6>run</span>: hugo --minify
-        <span style=color:#6272a4># Do a HUGO build of your markdown files to generate a stetic website that is stored in the `./public` folder</span>
-
-      - <span style=color:#ff79c6>name</span>: Deploy
-        <span style=color:#ff79c6>uses</span>: peaceiris/actions-gh-pages@v3
-        <span style=color:#ff79c6>if</span>: github.ref == &#39;refs/heads/main&#39;
-        <span style=color:#ff79c6>with</span>:
-          <span style=color:#ff79c6>github_token</span>: ${{ secrets.GITHUB_TOKEN }}
-          <span style=color:#ff79c6>publish_dir</span>: ./blog/public
-        <span style=color:#6272a4># takes the public folder and pushes the changes to a new branch called gh-pages</span>
-          
-      - <span style=color:#ff79c6>uses</span>: wangchucheng/algolia-uploader@master
-        <span style=color:#ff79c6>with</span>:
-          <span style=color:#ff79c6>app_id</span>: 9AWS4CUHVW
-          <span style=color:#ff79c6>admin_key</span>: ${{ secrets.ALGOLIA_ADMIN_KEY }}
-          <span style=color:#ff79c6>index_name</span>: fullcycledeveloper-blog
-          <span style=color:#ff79c6>index_file_path</span>: ./blog/public/algolia.json
-        <span style=color:#6272a4># Uploads the algolia json file to the index on algolia website</span>
-</code></pre></div><p>After each commit the generated website is pushed to the <code>gh-pages</code> branch. From here we can enable Github Pages in the Settings menu of the repository. Point it to the right branch and connect the domain name that you specified in the CNAME file. You&rsquo;ll have to do some DNS settings to make sure you are the actual owner of that domain and voila your website is ready to go!</p>
-<p>
-<img src=/img/gh-pages-settings.png alt="Github Pages settings">
-</p>
-<h3 id=adding-comments-to-the-posts-using-giscuss-based-on-github-discussions>Adding comments to the posts using Giscuss (based on Github Discussions)</h3>
-<p>A static website by default is just static.. That is ok for most scenarios but for a blog I wanted to add comments to the posts. I used Giscuss to do that. The Hugo Theme I used (<a href=https://themes.gohugo.io/themes/hugo-theme-cleanwhite/>Clean White Hugo Theme</a> ) has built in support for multiple comment systems. Since my main target audience is developers I chose Giscuss as the comment system.</p>
-<p>The only thing i needed to do is set the properties to the right Github Discussions space in my configuration .toml file.</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-toml data-lang=toml>[params.giscus]
-  data_repo=<span style=color:#f1fa8c>&#34;geertvdc/geertvdc.github.io&#34;</span>
-  data_repo_id=<span style=color:#f1fa8c>&#34;&lt;REPO_ID&gt;&#34;</span>
-  data_category=<span style=color:#f1fa8c>&#34;blog-comments&#34;</span>
-  data_category_id=<span style=color:#f1fa8c>&#34;&lt;CATEGORY_ID&gt;&#34;</span>
-  data_mapping=<span style=color:#f1fa8c>&#34;blog&#34;</span>
-  data_reactions_enabled=<span style=color:#f1fa8c>&#34;1&#34;</span>
-  data_emit_metadata=<span style=color:#f1fa8c>&#34;0&#34;</span>
-  data_theme=<span style=color:#f1fa8c>&#34;light&#34;</span>
-  data_lang=<span style=color:#f1fa8c>&#34;en&#34;</span>
-  crossorigin=<span style=color:#f1fa8c>&#34;anonymous&#34;</span>
-
-</code></pre></div><p>After doing that it just works! I didn&rsquo;t have to sign up for any new platform since my code is already on Github and now everything is in the same place.</p>
-<p>Hopefully this helps people set up a simple blog website as well. I&rsquo;m really happy in how it turned out and it really was a breeze to set it up.</p>
-<p>Happy Blogging!</p>
-<p>Geert van der Cruijsen</p>
-</div>
-</div>
-<hr>
 </div>
 <div class="col-lg-3 col-lg-offset-0
 col-md-3 col-md-offset-0
@@ -338,7 +201,7 @@ testing
 <p>Geert van der Cruijsen: Lead Consultant @ Xpirit, Public Speaker, Software Developer, Cloud Native Architect, Microsoft MVP</p>
 <ul class=list-inline>
 <li>
-<a href=/tags/cicd/index.xml rel=alternate type=application/rss+xml title="The full cycle developer blog">
+<a href=/tags/devops/index.xml rel=alternate type=application/rss+xml title="The full cycle developer blog">
 <span class="fa-stack fa-lg">
 <i class="fas fa-circle fa-stack-2x"></i>
 <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
@@ -397,7 +260,7 @@ testing
 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 <ul class="list-inline text-center">
 <li>
-<a href=/tags/cicd/index.xml rel=alternate type=application/rss+xml title="The full cycle developer blog">
+<a href=/tags/devops/index.xml rel=alternate type=application/rss+xml title="The full cycle developer blog">
 <span class="fa-stack fa-lg">
 <i class="fas fa-circle fa-stack-2x"></i>
 <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
