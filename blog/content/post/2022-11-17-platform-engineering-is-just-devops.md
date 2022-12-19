@@ -27,7 +27,7 @@ One of the latest hypes is "Platform Engineering". The idea behind it is pretty 
 
 ### DevOps, SRE, Platform Engineering?
 
-Since our industry is changing super fast most terms don't have an official description that everyone agrees on. So to at least be talking about the same thing here I'll drop my definitions of DevOps, SRE and Platform engineering here so that you know where I come from comparing them.
+All 3 terms are used in so many different ways at companies. Are they really different? Are they different implementations of the same thing or do they complement eachother?
 
 ### DevOps
 DevOps, a term used for quite a while now in our industry. There are a lot of different opinions about what DevOps is. To me it is much more than just putting some devs and operations people together. It's about creating autonomous teams who focus on delivering business value in a better & faster way. It's a combination of People, processes and tools all working together for the goal of delivering a better product faster. 
@@ -78,9 +78,9 @@ Within a company you want all applications to be able use the same identity for 
 > If you see some other examples of platform engineering teams let me know in the comments!
 
 ### Conclusion
-Platform engineering can be a great way to empower your DevOps teams to be more productive. Focus on making golden path implementations easier through self service but leave the responsibility on making choices at the DevOps teams. Internal platforms that are optional are the best way to go. If a team decides not to use it that's fine. It does mean they have to own things like compliance & security themselves but if that is worth it for them it's OK. Run your platform teams as internal products. have a product vision and treat your other internal teams as actual customers. A Platform engineering team should in the end just be another DevOps team that is responsible to build & run the platform as a product.
+Platform engineering can be a great way to empower your DevOps teams to be more productive. Focus on making golden path implementations easier through self service but leave the responsibility on making choices at the DevOps teams. Internal platforms that are optional are the best way to go. If a team decides not to use it that's fine. It does mean they have to own things like compliance & security themselves but if that is worth it for them it's OK. Run your platform teams as internal products. have a product vision and treat your other internal teams as actual customers. A Platform engineering team should in the end just be another DevOps team that is responsible to build & run their platform as a product in the same way DevOps teams run their software as a product.
 
-I think the book "Team Topologies" does a great job in describing relations between teams. DevOps teams should act as "Stream aligned teams". Focussing on a certain business capability. Platform teams should not act as a enabling team but rather just be a platform team that as i just said provides a platform that teams can choose to use. An SRE team could act in the form of "Enabling team" working together.
+I think the book "Team Topologies" does a great job in describing relations between teams. DevOps teams should act as "Stream aligned teams". Focussing on a certain business capability. Platform teams should not act as a enabling team but rather just be a "platform team" that as I wrote earlier provides a platform that teams can choose to use. An SRE team could act in the form of "Enabling team" working together with both the Platform engineering teams and the DevOps teams.
 
 ![Platform Engineering meme](/img/team-topologies.png)
 
